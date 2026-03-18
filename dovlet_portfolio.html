@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dovlet Gurbanov — Software Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --terra:    #C1623F;
+    --terra2:   #A04E2E;
+    --terra-lt: #D4845F;
+    --sand:     #F2E8D9;
+    --sand2:    #E8D9C0;
+    --dark:     #1C1410;
+    --mid:      #5C4A3A;
+    --light:    #9C836E;
+    --white:    #FDFAF6;
+    --border:   #DDD0BC;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--sand);
+    color: var(--dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(28, 20, 16, 0.96);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(193,98,63,0.3);
+    padding: 0 2.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 58px;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; color: var(--white); letter-spacing: 0.05em;
+  }
+  .nav-logo span { color: var(--terra-lt); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.6); text-decoration: none;
+    font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
+    font-weight: 500; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--terra-lt); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    background: var(--dark);
+    display: flex; align-items: center;
+    padding: 80px 2.5rem 60px;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg-text {
+    position: absolute; right: -0.02em; bottom: -0.1em;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(10rem, 22vw, 22rem);
+    color: rgba(193,98,63,0.07);
+    line-height: 1; pointer-events: none; user-select: none;
+    font-weight: 700; letter-spacing: -0.04em;
+  }
+  .hero-inner {
+    max-width: 900px; margin: 0 auto; width: 100%;
+    position: relative; z-index: 1;
+  }
+  .hero-eyebrow {
+    font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--terra-lt); margin-bottom: 1.4rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 32px; height: 1px; background: var(--terra);
+  }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 9vw, 7rem);
+    color: var(--white); font-weight: 700; line-height: 0.95;
+    margin-bottom: 1.6rem; letter-spacing: -0.02em;
+  }
+  h1 em { color: var(--terra-lt); font-style: italic; }
+  .hero-tagline {
+    font-size: 1.05rem; color: rgba(255,255,255,0.55);
+    max-width: 480px; margin-bottom: 2.5rem;
+    font-weight: 300; line-height: 1.8;
+  }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; text-decoration: none;
+    padding: 0.8rem 2rem; font-size: 0.78rem;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    font-weight: 600; transition: all 0.22s; cursor: pointer; border: none;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-terra { background: var(--terra); color: var(--white); }
+  .btn-terra:hover { background: var(--terra2); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .btn-outline:hover { border-color: var(--terra-lt); color: var(--terra-lt); }
+
+  .hero-stats {
+    display: flex; gap: 3.5rem; margin-top: 4rem;
+    border-top: 1px solid rgba(255,255,255,0.08); padding-top: 2rem;
+    flex-wrap: wrap;
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif; font-size: 2.2rem;
+    color: var(--terra-lt); font-weight: 700; display: block; line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .stat-label { font-size: 0.72rem; color: rgba(255,255,255,0.4); letter-spacing: 0.12em; text-transform: uppercase; }
+
+  /* SECTIONS */
+  section { padding: 90px 2.5rem; }
+  .container { max-width: 900px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--terra); margin-bottom: 0.5rem;
+    display: flex; align-items: center; gap: 0.7rem;
+  }
+  .section-label::after { content: ''; width: 32px; height: 1px; background: var(--terra); }
+  h2 {
+    font-family: 'Cormorant Garamond', serif; font-size: 2.6rem;
+    color: var(--dark); margin-bottom: 2.8rem; font-weight: 600; line-height: 1.1;
+  }
+
+  /* ABOUT */
+  #about { background: var(--white); }
+  .about-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 5rem; align-items: start; }
+  .about-text p { color: var(--mid); line-height: 1.85; margin-bottom: 1.1rem; font-size: 0.95rem; }
+  .about-details { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1.8rem; }
+  .detail-row { display: flex; gap: 1rem; font-size: 0.88rem; align-items: baseline; }
+  .detail-key {
+    color: var(--terra); width: 80px; flex-shrink: 0;
+    font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em;
+    padding-top: 2px; font-weight: 600;
+  }
+  .detail-val { color: var(--dark); font-weight: 400; }
+  .value-item {
+    padding: 1.3rem 1.5rem 1.3rem 1.2rem;
+    border-left: 3px solid var(--terra);
+    background: var(--sand); margin-bottom: 1rem;
+    transition: border-color 0.2s;
+  }
+  .value-item:hover { border-color: var(--terra2); }
+  .value-item h4 {
+    font-size: 0.8rem; color: var(--terra2); margin-bottom: 0.35rem;
+    font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .value-item p { font-size: 0.84rem; color: var(--mid); line-height: 1.65; }
+
+  /* EXPERIENCE */
+  #experience { background: var(--sand); }
+  .timeline { position: relative; padding-top: 4px; }
+  .timeline::before {
+    content: ''; position: absolute; left: 0; top: 8px; bottom: 0;
+    width: 1px; background: var(--border);
+  }
+  .job {
+    position: relative; padding-left: 2.2rem; margin-bottom: 3rem;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .job.visible { opacity: 1; transform: translateY(0); }
+  .job::before {
+    content: ''; position: absolute; left: -5px; top: 7px;
+    width: 11px; height: 11px; border-radius: 50%;
+    background: var(--sand); border: 2px solid var(--terra);
+  }
+  .job-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.2rem; }
+  .job-title { font-size: 1.05rem; font-weight: 600; color: var(--dark); }
+  .job-date { font-size: 0.75rem; color: var(--light); letter-spacing: 0.1em; text-transform: uppercase; }
+  .job-company { font-size: 0.88rem; color: var(--terra); margin-bottom: 1rem; font-style: italic; }
+  .job-badge {
+    display: inline-block; font-size: 0.62rem; letter-spacing: 0.12em;
+    text-transform: uppercase; padding: 0.15rem 0.55rem;
+    background: var(--terra); color: var(--white);
+    margin-left: 0.6rem; vertical-align: middle; font-style: normal;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .job ul { list-style: none; }
+  .job ul li {
+    font-size: 0.9rem; color: var(--mid); padding: 0.3rem 0 0.3rem 1.2rem;
+    position: relative; line-height: 1.7;
+  }
+  .job ul li::before { content: '—'; position: absolute; left: 0; color: var(--terra); }
+
+  /* SKILLS */
+  #skills { background: var(--dark); }
+  #skills h2 { color: var(--sand); }
+  #skills .section-label { color: var(--terra-lt); }
+  #skills .section-label::after { background: var(--terra); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 1.2rem; }
+  .skill-card {
+    background: rgba(242,232,217,0.05);
+    border: 1px solid rgba(242,232,217,0.1);
+    padding: 1.5rem;
+    transition: border-color 0.22s, background 0.22s, transform 0.22s;
+  }
+  .skill-card:hover {
+    border-color: var(--terra);
+    background: rgba(193,98,63,0.08);
+    transform: translateY(-2px);
+  }
+  .skill-card h4 {
+    font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--terra-lt); margin-bottom: 1rem; font-weight: 600;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag {
+    font-size: 0.77rem; color: rgba(242,232,217,0.6);
+    background: rgba(242,232,217,0.07); padding: 0.25rem 0.65rem;
+  }
+
+  /* PROJECTS */
+  #projects { background: var(--white); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
+  .project-card {
+    border: 1px solid var(--border); background: var(--sand);
+    padding: 2rem; position: relative; overflow: hidden;
+    transition: transform 0.22s, box-shadow 0.22s;
+  }
+  .project-card::before {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 3px; background: var(--terra);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .project-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(193,98,63,0.12); }
+  .project-card:hover::before { transform: scaleX(1); }
+  .project-num {
+    font-family: 'Cormorant Garamond', serif; font-size: 3rem;
+    color: var(--border); font-weight: 700; line-height: 1; margin-bottom: 0.5rem;
+  }
+  .project-card h3 { font-size: 1rem; font-weight: 600; color: var(--dark); margin-bottom: 0.6rem; }
+  .project-card p { font-size: 0.85rem; color: var(--mid); line-height: 1.75; margin-bottom: 1rem; }
+  .project-stack { font-size: 0.75rem; color: var(--terra); font-weight: 500; }
+  .proj-badge {
+    display: inline-block; font-size: 0.6rem; letter-spacing: 0.12em;
+    text-transform: uppercase; padding: 0.15rem 0.5rem;
+    background: var(--terra); color: var(--white);
+    margin-left: 0.5rem; vertical-align: middle;
+    font-family: 'DM Sans', sans-serif; font-weight: 600;
+  }
+
+  /* EDUCATION */
+  #education { background: var(--sand); }
+  .edu-card {
+    display: flex; gap: 2.5rem; align-items: flex-start;
+    background: var(--white); border: 1px solid var(--border);
+    padding: 2.2rem; margin-bottom: 1rem;
+  }
+  .edu-icon {
+    width: 52px; height: 52px; background: var(--terra);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; color: var(--white); font-weight: 700; letter-spacing: 0.03em;
+  }
+  .edu-info h3 { font-size: 1rem; font-weight: 600; color: var(--dark); margin-bottom: 0.3rem; }
+  .edu-info .school { font-size: 0.88rem; color: var(--terra); margin-bottom: 0.4rem; }
+  .edu-info .detail { font-size: 0.82rem; color: var(--light); line-height: 1.6; }
+
+  /* CONTACT */
+  #contact { background: var(--terra2); }
+  #contact h2 { color: var(--sand); }
+  #contact .section-label { color: var(--sand2); }
+  #contact .section-label::after { background: var(--sand2); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .contact-intro { color: rgba(242,232,217,0.75); font-size: 0.97rem; line-height: 1.85; font-weight: 300; }
+  .contact-links { display: flex; flex-direction: column; gap: 0.9rem; }
+  .contact-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 1.4rem; border: 1px solid rgba(242,232,217,0.2);
+    text-decoration: none; color: rgba(242,232,217,0.8);
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    font-size: 0.88rem;
+  }
+  .contact-item:hover {
+    background: rgba(242,232,217,0.1);
+    border-color: rgba(242,232,217,0.5);
+    color: var(--sand);
+  }
+  .contact-icon { font-size: 0.9rem; flex-shrink: 0; opacity: 0.7; }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark); color: rgba(242,232,217,0.35);
+    text-align: center; padding: 1.6rem;
+    font-size: 0.75rem; letter-spacing: 0.1em;
+  }
+  footer strong { color: var(--terra-lt); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner > * { opacity: 0; animation: fadeUp 0.65s ease forwards; }
+  .hero-eyebrow { animation-delay: 0.1s; }
+  h1             { animation-delay: 0.25s; }
+  .hero-tagline  { animation-delay: 0.4s; }
+  .hero-ctas     { animation-delay: 0.52s; }
+  .hero-stats    { animation-delay: 0.65s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 660px) {
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero-stats { gap: 2rem; }
+    nav { padding: 0 1.2rem; }
+    .nav-links { gap: 1.2rem; }
+    .nav-links a { font-size: 0.72rem; }
+    .edu-card { flex-direction: column; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Dovlet <span>Gurbanov</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg-text">DG</div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Software Developer — Kent, Ohio</div>
+    <h1>Dovlet<br/><em>Gurbanov</em></h1>
+    <p class="hero-tagline">Sophomore CS student & software developer building real-world tools for Kent State's sports programs — with roots in frontend engineering from Ashgabat, Turkmenistan.</p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn btn-terra">View My Work</a>
+      <a href="#contact" class="btn btn-outline">Get In Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <span class="stat-num">1+</span>
+        <span class="stat-label">Year Experience</span>
+      </div>
+      <div>
+        <span class="stat-num">2</span>
+        <span class="stat-label">Companies</span>
+      </div>
+      <div>
+        <span class="stat-num">Soph.</span>
+        <span class="stat-label">Year at KSU</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="section-label">01 — About</div>
+    <h2>Who I Am</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm Dovlet, a sophomore Computer Science student at Kent State University and a software developer for KSU's Athletic / Sports department. I write code that solves real problems for real people — whether that's athletes, coaches, or fans.</p>
+        <p>Before coming to Ohio, I worked as a Frontend Developer at ITEA TM in Ashgabat, Turkmenistan, where I built web interfaces and sharpened my eye for clean, user-friendly design.</p>
+        <p>I'm early in my career but move quickly — I learn by shipping, and I care deeply about craft, curiosity, and getting better every day.</p>
+        <div class="about-details">
+          <div class="detail-row"><span class="detail-key">Location</span><span class="detail-val">Kent, OH</span></div>
+          <div class="detail-row"><span class="detail-key">Email</span><span class="detail-val">dovlet.gurbanov@protonmail.com</span></div>
+          <div class="detail-row"><span class="detail-key">GitHub</span><span class="detail-val">github.com/dgurbanov</span></div>
+          <div class="detail-row"><span class="detail-key">Status</span><span class="detail-val">Open to internships &amp; opportunities</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="value-item">
+          <h4>Ship &amp; Learn</h4>
+          <p>The fastest way to grow is to build real things and reflect on what breaks.</p>
+        </div>
+        <div class="value-item">
+          <h4>User First</h4>
+          <p>Good interfaces disappear — the best software feels inevitable to the person using it.</p>
+        </div>
+        <div class="value-item">
+          <h4>Stay Curious</h4>
+          <p>Being a sophomore means I'm still early. That's not a weakness — it's an advantage.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+    <div class="section-label">02 — Experience</div>
+    <h2>Where I've Worked</h2>
+    <div class="timeline">
+
+      <div class="job">
+        <div class="job-header">
+          <span class="job-title">Software Developer <span class="job-badge">Current</span></span>
+          <span class="job-date">2024 — Present</span>
+        </div>
+        <div class="job-company">Kent State University — Sports Department, Kent, OH</div>
+        <ul>
+          <li>Develop and maintain internal web applications used by KSU's athletic programs and sports staff.</li>
+          <li>Collaborate directly with coaches and department staff to translate workflows into software solutions.</li>
+          <li>Work across the full stack — building interfaces, integrating data, and keeping systems running smoothly.</li>
+          <li>Currently co-founding <strong>SponsorMatch</strong> — a startup born out of this role that connects college athletic programs with potential sponsors through an intelligent matching platform.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-header">
+          <span class="job-title">Frontend Developer</span>
+          <span class="job-date">2023 — 2024</span>
+        </div>
+        <div class="job-company">ITEA TM — Ashgabat, Turkmenistan</div>
+        <ul>
+          <li>Built responsive web interfaces for client projects using modern HTML, CSS, and JavaScript frameworks.</li>
+          <li>Translated designer mockups into clean, pixel-accurate, and accessible front-end code.</li>
+          <li>Gained hands-on experience working in a professional team with real client deadlines.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <div class="section-label">03 — Skills</div>
+    <h2>Technical Toolkit</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h4>Languages</h4>
+        <div class="skill-tags">
+          <span class="tag">JavaScript</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">Python</span>
+          <span class="tag">HTML5</span>
+          <span class="tag">CSS3</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h4>Frameworks</h4>
+        <div class="skill-tags">
+          <span class="tag">React</span>
+          <span class="tag">Next.js</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">Vue.js</span>
+          <span class="tag">Tailwind</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h4>Tools</h4>
+        <div class="skill-tags">
+          <span class="tag">Git</span>
+          <span class="tag">GitHub</span>
+          <span class="tag">Figma</span>
+          <span class="tag">VS Code</span>
+          <span class="tag">Docker</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h4>Databases</h4>
+        <div class="skill-tags">
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">SQLite</span>
+          <span class="tag">Supabase</span>
+          <span class="tag">Mongita DB</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h4>Practices</h4>
+        <div class="skill-tags">
+          <span class="tag">REST APIs</span>
+          <span class="tag">Responsive Design</span>
+          <span class="tag">Agile</span>
+          <span class="tag">UI/UX</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <div class="section-label">04 — Projects</div>
+    <h2>Things I've Built</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-num">01</div>
+        <h3>Rocky AI <span class="proj-badge">Active</span></h3>
+        <p>Kent State University's AI assistant for students — helping Flashes navigate campus resources, deadlines, and academic life. Designed and built the full web interface, and integrated Mongita DB for lightweight, file-based data persistence.</p>
+        <div class="project-stack">React · Python · Mongita DB · AI/LLM</div>
+      </div>
+      <div class="project-card">
+        <div class="project-num">02</div>
+        <h3>SponsorMatch <span class="proj-badge">Active</span></h3>
+        <p>Startup co-founded from my work at KSU Sports — an intelligent platform that connects college athletic programs with relevant sponsors, streamlining outreach and partnership discovery.</p>
+        <div class="project-stack">React · Node.js · PostgreSQL</div>
+      </div>
+      <div class="project-card">
+        <div class="project-num">03</div>
+        <h3>LedgerLite</h3>
+        <p>Personal finance tracker with CSV import, spending categories, and clean visual charts for budgeting on a student income.</p>
+        <div class="project-stack">React · SQLite · Chart.js</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="container">
+    <div class="section-label">05 — Education</div>
+    <h2>Academic Background</h2>
+    <div class="edu-card">
+      <div class="edu-icon">KSU</div>
+      <div class="edu-info">
+        <h3>B.S. Computer Science — Sophomore Year</h3>
+        <div class="school">Kent State University — Kent, OH</div>
+        <div class="detail">Expected Graduation: May 2027 &nbsp;·&nbsp; Currently working in the Athletics / Sports Department</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="section-label">06 — Contact</div>
+    <h2>Let's Talk</h2>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-intro">I'm actively looking for internships and opportunities where I can keep learning and contributing. Whether it's a project, a role, or just a conversation — feel free to reach out.</p>
+      </div>
+      <div class="contact-links">
+        <a class="contact-item" href="mailto:dovlet.gurbanov@protonmail.com">
+          <span class="contact-icon">✉</span>
+          <span>dovlet.gurbanov@protonmail.com</span>
+        </a>
+        <a class="contact-item" href="#">
+          <span class="contact-icon">in</span>
+          <span>linkedin.com/in/dovletgurbanov</span>
+        </a>
+        <a class="contact-item" href="#">
+          <span class="contact-icon">{ }</span>
+          <span>github.com/dgurbanov</span>
+        </a>
+        <a class="contact-item" href="#">
+          <span class="contact-icon">◉</span>
+          <span>Kent, Ohio, US</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Built by <strong>Dovlet Gurbanov</strong> &nbsp;·&nbsp; Kent State University &nbsp;·&nbsp; 2026</p>
+</footer>
+
+<script>
+  const jobs = document.querySelectorAll('.job');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 150);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  jobs.forEach(j => io.observe(j));
+
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + cur
+        ? 'var(--terra-lt)' : 'rgba(255,255,255,0.6)';
+    });
+  });
+</script>
+</body>
+</html>
